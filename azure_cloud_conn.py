@@ -1,6 +1,6 @@
 # Separate python scripts to be imported into scripts.property
 # IMPORTS
-import pyodbc
+
 
 
 # Class Variable declaration
@@ -28,7 +28,7 @@ class Database:
         fetched = []
         while row:
             placer = []
-            print(str(row[0]) + "\n" + str(row[1]) + "\n" + str(row[2]) + "\n" + str(row[3]) + "\n" + str(row[4]) + "\n" + str(row[5]) + "\n" + 
+            print(str(row[0]) + "\n" + str(row[1]) + "\n" + str(row[2]) + "\n" + str(row[3]) + "\n" + str(row[4]) + "\n" + str(row[5]) + "\n" +
              str(row[6]) + "\n" + str(row[7]) + "\n")
             placer.append(str(row[0]))
             placer.append(str(row[1]))
@@ -43,7 +43,7 @@ class Database:
         cursor.close()
         conn.close()
         return fetched
-    
+
     def insert_data(self, table, columns, qs, data):
         conn, cursor = self.connect()
         cursor.execute("INSERT INTO {} {} VALUES {};".format(table, columns, qs), ("{}".format(data)))
