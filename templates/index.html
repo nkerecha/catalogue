@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Data Catalogue</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='images/icons/favicon.ico')}}">
+
+	</head>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/animsition/css/animsition.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+	href="{{url_for('static', filename='vendor/daterangepicker/daterangepicker.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css"
+href="{{url_for('static', filename='styles/main.css')}}">
+<link rel="stylesheet" type="text/css"
+href="{{url_for('static', filename='styles/util.css')}}">
+<!--===============================================================================================-->
+
+<body>
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form name = "form_name" class="contact100-form validate-form" action='add' method="post" onsubmit="return validateForm()">
+				<span class="contact100-form-title">
+				Required Catalogue Fields
+				</span>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate="Please enter the entity name">
+					<input class="input100" type="text" name="data_name" placeholder="Data Entity Name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter serial number">
+					<input class="input100" type="text" name="serial_number" placeholder="Serial Number">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter source name">
+					<input class="input100" type="text" name="source_name" placeholder="Data Source Name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter the Description">
+					<textarea class="input100" name="description" placeholder="Data Description"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter business owner">
+					<input class="input100" type="text" name="data_owner" placeholder="Data Owner">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter YES/NO">
+					<input class="input100" type="text" name="private_data" placeholder="Contains private data">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter the column tags">
+					<textarea class="input100" name="tags" placeholder="Tags (Optional)"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div id = "setter" class="wrap-input100 validate-input" data-validate = "Please enter YES/NO">
+					<input class="input100" type="text" name="recurring_data" placeholder="Is there recurring data">
+					<span class="focus-input100"></span>
+				</div>
+				{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+		    {% for message in messages %}
+			  <div class="alert alert-warning alert-dismissible" role="alert">
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				{{message}}
+			  </div>
+			{% endfor %}
+		  {% endif %}
+		{% endwith %}
+
+		{% block body %}{% endblock %}
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+							Add
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/animsition/js/animsition.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/select2/select2.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/daterangepicker/moment.min.js') }}"></script>
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
+<!--===============================================================================================-->
+	<script type=text/javascript src="{{
+	url_for('static', filename='vendor/countdowntime/countdowntime.js') }}"></script>
+<!--===============================================================================================-->
+<script type=text/javascript src="{{
+url_for('static', filename='js/main.js')}}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
