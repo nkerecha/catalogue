@@ -1,16 +1,15 @@
-# Resolved Python Imports 
+# Resolved Python Imports
 from datetime import timedelta
 import os
 from flask import Flask, request, redirect, render_template, url_for, session
 from flask import flash
 from flask_session import Session
-import pyodbc
 from azure_cloud_conn import Database
 from google_cloud_conn import *
-import numpy as np 
+import numpy as np
 import pandas as pd
 
-# Constants --- 
+# Constants ---
 # SENT = 'AZURE'
 SENT = 'GOOGLE'
 
@@ -22,7 +21,7 @@ app.config.from_object(__name__)
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
-app.config['SESSION_FILE_THRESHOLD'] = 100  
+app.config['SESSION_FILE_THRESHOLD'] = 100
 app.config['SECRET_KEY'] = '5f352379324c22463451387a0aec5d2f'
 sess = Session()
 sess.init_app(app)
@@ -38,13 +37,13 @@ ssl_cert = 'ssl/client-cert.pem'
 ssl_key = 'ssl/client-key.pem'
 # -- End of Google Cloud ---
 
-# -- Azure SQL Servr Database Instance (Login Credentials) -- 
+# -- Azure SQL Servr Database Instance (Login Credentials) --
 server = 'randomdata.azure_cloud_conn.windows.net'
 database = 'testing'
-username = 'Naftal' 
+username = 'Naftal'
 password_azure = 'Torivega1234#'
 driver = '{ODBC Driver 17 for SQL Server}'
-# -- End of Azure Cloud SQL Server Instance --- 
+# -- End of Azure Cloud SQL Server Instance ---
 
 
 @app.route('/')
@@ -69,7 +68,7 @@ def add_data():
             flash("Submission Failed")
         else:
             if (SENT == "AZURE"):
-                conn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + 
+                conn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server +
                                       ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password_azure)
                 cursor = conn.cursor()
                 print("\n")
@@ -95,7 +94,7 @@ def add_data():
                 columns = "(Data_Name,Serial_Number, Source_Name,Data_Description,Data_owner,Private_Data,Tags,Recurring_Data)"
                 qs = "(%s,%s,%s,%s,%s,%s,%s,%s)"
                 val = (data_name, serial_number, source_name, description, owner, private_data, tags, recurring_data)
-               
+
                 data.single_insert(database_name, table_name, columns, qs , val)
                 print("Database Connection : {}".format('LIVE'))
                 print("Submission Test : {}".format("SUCESSFUL"))
@@ -141,5 +140,5 @@ def display():
 
 
 if __name__ == '__main__':
-   
+
     app.run(debug=True)
