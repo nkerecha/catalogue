@@ -9,6 +9,8 @@ from google_cloud_conn import *
 import numpy as np
 import pandas as pd
 from datetime import datetime
+import pytz
+import tzlocal
 
 # Constants ---
 # SENT = 'AZURE'
@@ -157,7 +159,10 @@ def table():
         dataframe = pd.DataFrame(fetched_data)
         dataframe_html = list(dataframe.itertuples(index=False, name=None))
         headings = ("Data Name", "Serial Number", "Source Name", "Description", "Data Owner", "Private Data", "Tags", "Recurrent")
-        now = datetime.now()
+        zone = tzlocal.get_localzone().zone
+        print(zone)
+        tz = pytz.timezone(zone)
+        now = datetime.now(tz)
         space = "\t"
         num_rows = len(dataframe_html)
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
