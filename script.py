@@ -8,6 +8,7 @@ from azure_cloud_conn import Database
 from google_cloud_conn import *
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 # Constants ---
 # SENT = 'AZURE'
@@ -136,7 +137,31 @@ def display():
         dataframe = pd.DataFrame(fetched_data)
         dataframe_html = list(dataframe.itertuples(index=False, name=None))
         headings = ("Data Name", "Serial Number", "Source Name", "Description", "Data Owner", "Private Data", "Tags", "Recurrent")
-    return render_template('/display.html', headings=headings, data=dataframe_html)
+        now = datetime.now()
+        space = " "
+        num_rows = len(dataframe_html)
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    return render_template('/access.html', headings=headings, data=dataframe_html, data_Name = headings[0], source_Name = headings[1], data_Owner = headings[2], date_time = dt_string, entries = num_rows)
+
+@app.route('/tables')
+def table():
+    if (SENT == 'AZURE'):
+        # fetching azure_cloud_conn data and creating a json file from it
+        display = Database(server, database, username, password, driver)
+        fetched_data = display.fetch_data("dbo.Dummy")
+        dataframe = pd.DataFrame(fetched_data)
+        print(dataframe)
+    elif (SENT == 'GOOGLE'):
+        display = Connect(user, password, host, client_flags, ssl_ca, ssl_cert, ssl_key)
+        fetched_data = display.fetch_all('guelph' , 'dummy')
+        dataframe = pd.DataFrame(fetched_data)
+        dataframe_html = list(dataframe.itertuples(index=False, name=None))
+        headings = ("Data Name", "Serial Number", "Source Name", "Description", "Data Owner", "Private Data", "Tags", "Recurrent")
+        now = datetime.now()
+        space = "\t"
+        num_rows = len(dataframe_html)
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    return render_template('/tables.html', headings=headings, data=dataframe_html, data_Name = headings[0], source_Name = headings[1], data_Owner = headings[2], date_time = dt_string, entries = num_rows, space = space)
 
 
 if __name__ == '__main__':

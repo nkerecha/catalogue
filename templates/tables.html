@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Catalogue Dashboard</title>
+        <link href="static/acess_static/css/styles.css" rel="stylesheet" />
+        <link href="static/landing/img/catalog.png" rel="icon">
+        <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/searchpanes/1.2.2/css/searchPanes.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css" rel="stylesheet">
+
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+
+        <style>
+        #search{
+          padding-bottom :  30px;
+        }
+        div.dtsp-verticalContainer{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-content: flex-start;
+          align-items: flex-start;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes,
+div.dtsp-verticalContainer div.dtsp-dataTable{
+    width: 30%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes{
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 26%;
+}
+
+div.dtsp-verticalPanes {
+    margin-right: 20px;
+}
+
+div.dtsp-title {
+    margin-right: 0px !important;
+    margin-top: 13px !important;
+}
+
+input.dtsp-search {
+    min-width: 0px !important;
+    padding-left: 0px !important;
+    margin: 0px !important;
+
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes{
+    flex-direction: column;
+    flex-basis: 0px;
+}
+
+div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes div.dtsp-searchPane{
+    flex-basis: 0px;
+}
+
+div.dtsp-verticalContainer div.dtsp-dataTable{
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 70%;
+}
+#layoutSidenav2{
+  padding-top : 80px;
+}
+#back{
+  margin-left : 1100px;
+
+}
+table{
+  max-width : 800px;
+}
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">GUELPH CATALOGUE</a>
+            <!-- Navbar Search-->
+            <a class="btn btn-link btn-sm order-8 order-lg-5" id="back" href="display"><i class="fas fa-chevron-circle-left"></i></a>
+        </nav>
+
+        <div id="layoutSidenav2">
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+
+                      <ol class="breadcrumb mb-4">
+                          <li class="breadcrumb-item active"><strong>DATA LAST UPDATED</strong> : {{date_time}} </li>
+                      </ol>
+
+                          <div class="row">
+                              <div class="col-xl-6 col-md-6">
+                                  <div class="card bg-primary text-white mb-4">
+                                      <div class="card-body">ENTRIES IN CATALOGUE : {{entries}}</div>
+                                      <div class="card-footer d-flex align-items-center justify-content-between">
+                                          <a class="small text-white stretched-link" href="#">Learn More</a>
+                                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="col-xl-6 col-md-6">
+                                  <div class="card bg-success text-white mb-4">
+                                      <div class="card-body">Update Entry</div>
+                                      <div class="card-footer d-flex align-items-center justify-content-between">
+                                          <a class="small text-white stretched-link" href="#">Proceed</a>
+                                          <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                          </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                              Retrieved data
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                <div id = "search">
+                                  <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                                  <thead>
+                                  <tr>
+                                    {% for header in headings%}
+                                    <th>
+                                    {{header}}
+                                    </th>
+                                    {%endfor%}
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  {%for row in data%}
+                                  <tr>
+                                  {%for cell in row%}
+                                  <td>{{cell}}</td>
+                                  {%endfor%}
+                                  </tr>
+                                  {%endfor%}
+                                  </tbody>
+                                  <tfoot>
+                                  <tr>
+                                    {% for header in headings%}
+                                    <th>
+                                    {{header}}
+                                    </th>
+                                    {%endfor%}
+                                  </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+
+
+                              </div>
+                    </div>
+                </main>
+
+            </div>
+</div>
+
+        <script src="static/acess_static/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/searchpanes/1.2.2/js/dataTables.searchPanes.min.js"></script>
+      <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+      <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+      <script src="static/acess_static/assets/demo/chart-area-demo.js"></script>
+      <script src="static/acess_static/assets/demo/chart-bar-demo.js"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('#example').DataTable( {
+      searchPanes:{
+          layout: 'columns-1',
+      },
+      responsive: true,
+      dom: '<"dtsp-verticalContainer"<"dtsp-verticalPanes"P><"dtsp-dataTable"frtip>>',
+      pageLength: 30
+  });
+
+      });
+      </script>
+
+        <script src="static/acess_static/assets/demo/datatables-demo.js"></script>
+
+    </body>
+</html>
