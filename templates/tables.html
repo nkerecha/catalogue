@@ -28,62 +28,64 @@
           justify-content: flex-start;
           align-content: flex-start;
           align-items: flex-start;
-}
+        }
 
-div.dtsp-verticalContainer div.dtsp-verticalPanes,
-div.dtsp-verticalContainer div.dtsp-dataTable{
-    width: 30%;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 0;
-}
+        div.dtsp-verticalContainer div.dtsp-verticalPanes,
+        div.dtsp-verticalContainer div.dtsp-dataTable{
+          width: 30%;
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 0;
+        }
 
-div.dtsp-verticalContainer div.dtsp-verticalPanes{
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 26%;
-}
+        div.dtsp-verticalContainer div.dtsp-verticalPanes{
+          flex-grow: 1;
+          flex-shrink: 0;
+          flex-basis: 26%;
+        }
 
-div.dtsp-verticalPanes {
-    margin-right: 20px;
-}
+        div.dtsp-verticalPanes {
+          margin-right: 20px;
+        }
 
-div.dtsp-title {
-    margin-right: 0px !important;
-    margin-top: 13px !important;
-}
+        div.dtsp-title {
+          margin-right: 0px !important;
+          margin-top: 13px !important;
+        }
 
-input.dtsp-search {
-    min-width: 0px !important;
-    padding-left: 0px !important;
-    margin: 0px !important;
+        input.dtsp-search {
+          min-width: 0px !important;
+          padding-left: 0px !important;
+          margin: 0px !important;
 
-}
+        }
 
-div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes{
-    flex-direction: column;
-    flex-basis: 0px;
-}
+        div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes{
+          flex-direction: column;
+          flex-basis: 0px;
+        }
 
-div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes div.dtsp-searchPane{
-    flex-basis: 0px;
-}
+        div.dtsp-verticalContainer div.dtsp-verticalPanes div.dtsp-searchPanes div.dtsp-searchPane{
+          flex-basis: 0px;
+        }
 
-div.dtsp-verticalContainer div.dtsp-dataTable{
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 70%;
-}
-#layoutSidenav2{
-  padding-top : 80px;
-}
-#back{
-  margin-left : 1100px;
+        div.dtsp-verticalContainer div.dtsp-dataTable{
+          flex-grow: 1;
+          flex-shrink: 0;
+          flex-basis: 70%;
+        }
+        #layoutSidenav2{
+          padding-top : 80px;
+        }
+        table{
+          max-width : 800px;
+        }
 
-}
-table{
-  max-width : 800px;
-}
+        .modal-body div{float:left; width: 100%}
+        .modal-body div p{float:left; width: 30%; font-weight: 600;}
+        .modal-body div span{float:left; width: 60%}
+
+  
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -91,7 +93,9 @@ table{
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/">GUELPH CATALOGUE</a>
             <!-- Navbar Search-->
+
             <a class="btn btn-link btn-sm order-8 order-lg-5" id="back" href="display"><i class="fas fa-chevron-circle-left"></i></a>
+
         </nav>
 
         <div id="layoutSidenav2">
@@ -106,7 +110,7 @@ table{
                           <div class="row">
                               <div class="col-xl-6 col-md-6">
                                   <div class="card bg-primary text-white mb-4">
-                                      <div class="card-body">ENTRIES IN CATALOGUE : {{entries}}</div>
+                                      <div class="card-body">Data in catalogue : <strong>{{entries}} ENTRIES</strong></div>
                                       <div class="card-footer d-flex align-items-center justify-content-between">
                                           <a class="small text-white stretched-link" href="#">Learn More</a>
                                           <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -171,8 +175,46 @@ table{
                               </div>
                     </div>
                 </main>
+                <div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog modal-dialog-scrollable modal-lg">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Selected Data</h4>
+    </div>
+    <div class="modal-body">
+      <ol class="breadcrumb">
+      <div class="data_name"><p>Data Entity Name: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="serial_number"><p>Serial Number: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="source_name"><p>Source Name: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="description"><p>Description: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="data_owner"><p>Data Owner: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="private"><p>Private: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="tags"><p>Tags: </p><span></span></div></ol>
+
+      <ol class="breadcrumb">
+      <div class="recurrent"><p>Recurrent: </p><span></span></div></ol>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
 
             </div>
+</div>
+</div>
 </div>
 
         <script src="static/acess_static/js/scripts.js"></script>
@@ -201,7 +243,22 @@ table{
       responsive: true,
       dom: '<"dtsp-verticalContainer"<"dtsp-verticalPanes"P><"dtsp-dataTable"frtip>>',
       pageLength: 30
-  });
+      });
+
+      var table = $('#example').DataTable();
+      $('#example tbody').on('dblclick', 'tr', function () {
+          //console.log(table.row(this).data());
+          $(".modal-body div span").text("");
+          $(".data_name span").text(table.row(this).data()[0]);
+          $(".serial_number span").text(table.row(this).data()[1]);
+          $(".source_name span").text(table.row(this).data()[2]);
+          $(".description span").text(table.row(this).data()[3]);
+          $(".data_owner span").text(table.row(this).data()[4]);
+          $(".private span").text(table.row(this).data()[5]);
+          $(".tags span").text(table.row(this).data()[6]);
+          $(".recurrent span").text(table.row(this).data()[7]);
+          $("#myModal").modal("show");
+      });
 
       });
       </script>

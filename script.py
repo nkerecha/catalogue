@@ -168,6 +168,14 @@ def table():
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     return render_template('/tables.html', headings=headings, data=dataframe_html, data_Name = headings[0], source_Name = headings[1], data_Owner = headings[2], date_time = dt_string, entries = num_rows, space = space)
 
+@app.route('/dashboard')
+def dash():
+    zone = tzlocal.get_localzone().zone
+    print(zone)
+    tz = pytz.timezone(zone)
+    now = datetime.now(tz)
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    return render_template('/dashboard.html',date_time = dt_string)
 
 if __name__ == '__main__':
 
