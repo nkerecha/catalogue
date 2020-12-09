@@ -28,19 +28,43 @@
   <link href="static/landing/css/style.css" rel="stylesheet">
 <style>
   #intro2{
-    padding-top: 100px;
-
+    padding-top: 90px;
+    padding-bottom : 30px;
   }
   #intro2 .card{
     margin: 0 auto;
   }
   #header{
-    background-color: #e6e6eb;
-    height:60px;
+    background-color: #f5eeed;
+    height:70px;
   }
   .modal{
 
   }
+  .far {
+
+  background: $brand-accent;
+  border-radius: 0;
+  color: $utility-dark-grey;
+  display:inline-block;
+  font-size: 1rem;
+  height: 50px;
+  line-height: 50px;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -moz-transform:rotate(-90deg);
+  -ms-transform:rotate(-90deg);
+  -o-transform:rotate(-90deg);
+  -webkit-transform:rotate(-90deg);
+  transform-origin: bottom right;
+  width: 350px;
+  /* Hover styles,
+  media queries */
+}
+
 
   </style>
 </head>
@@ -50,6 +74,7 @@
   <!--==========================
   Header
   ============================-->
+
   <header id="header">
 
 
@@ -57,6 +82,7 @@
 
       <div class="logo float-left">
         <!-- Uncomment below if you prefer to use an image logo -->
+
         <h1 class="text-light"><a href="/" class="scrollto"><span>DATA CATALOGUE</span></a></h1>
 
       </div>
@@ -64,7 +90,6 @@
       <nav class="main-nav float-right d-none d-lg-block">
      <ul>
        <li class="active"><a href="#intro">Home</a></li>
-       <li><a href="#about">Process</a></li>
        <li class="drop-down"><a href="">Catalogue</a>
          <ul>
            <li><a href="add">Add To Catalogue</a></li>
@@ -82,19 +107,23 @@
 
          </ul>
        </li>
+       <li><a href="#about">Process</a></li>
+
      </ul>
    </nav><!-- .main-nav -->
 
     </div>
+
   </header><!-- #header -->
 
   <section id="intro2" class="clearfix">
+
     <div class="container d-flex h-100">
       <div class="card">
   <h5 class="card-header">Data Catalogue Form</h5>
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-  Field Descriptions
+<button type="button" class="btn btn-primary far" data-toggle="modal" data-target="#staticBackdrop">
+  <strong>Field Descriptions</strong>
 </button>
 
 <!-- Modal -->
@@ -123,13 +152,13 @@
   </div>
 </div>
   <div class="card-body">
-    <h5 class="card-title">Fields with an * need to be filled</h5>
+
     <form class="needs-validation" id = "form_id" novalidate action='add' method="post">
       <div class="form-row">
         <div class="col-md-12 mb-4">
 
 
-          <label for="validationCustom01">Data Entity Name *</label>
+          <label for="validationCustom01"><strong>Data Title *</strong></label>
           <input type="text" class="form-control" id="validationCustom01" name="data_name" placeholder="Data Entity Name" required>
 
           <div class="invalid-feedback">
@@ -139,7 +168,7 @@
         </div>
 
         <div class="col-md-12 mb-4">
-          <label for="validationCustom02">Serial Number</label>
+          <label for="validationCustom02"><strong>Serial Number *</strong></label>
           <input type="text" class="form-control" id="validationCustom02"  name="serial_number"  placeholder="Serial Number" required>
 
           <div class="invalid-feedback">
@@ -147,7 +176,7 @@
           </div>
         </div>
         <div class="col-md-12 mb-4">
-          <label for="validationCustomUsername">Source Name</label>
+          <label for="validationCustomUsername"><strong>Source Name *</strong></label>
           <div class="input-group">
 
             <input type="text" class="form-control" id="validationCustomUsername" name="source_name" placeholder="Source Name" aria-describedby="inputGroupPrepend" required>
@@ -159,38 +188,45 @@
 
 
         <div class="col-md-12 mb-4">
-          <label for="validationCustom03">Description</label>
+          <label for="validationCustom03"><strong>Description *</strong></label>
           <input type="text" class="form-control" id="validationCustom03"  name="description"  placeholder="Description of Data" required>
           <div class="invalid-feedback">
             Please provide a description of the data.
           </div>
         </div>
         <div class="col-md-12 mb-4">
-          <label for="validationCustom04">Data Owner</label>
+          <label for="validationCustom04"><strong>Data Owner *</strong></label>
           <input type="text" class="form-control" id="validationCustom04" name="data_owner" placeholder="Data Owner" required>
           <div class="invalid-feedback">
             Please provide the data owner name.
           </div>
         </div>
+
         <div class="col-md-12 mb-4">
-          <label for="validationCustom05">Private</label>
-          <input type="text" class="form-control" id="validationCustom05" name="private_data" placeholder="Is the data private?" required>
-          <div class="invalid-feedback">
-            Please type YES/NO for private data
-          </div>
+          <label for="validationCustom05"><strong>Private *</strong></label>
+            <select id="inputState" class="form-control", name = "private_data">
+
+              <option>Yes</option>
+                <option>No</option>
+                <option selected>Not Aware</option>
+
+            </select>
         </div>
 
       <div class="col-md-12 mb-4">
-        <label for="validationCustom05">Tags</label>
+        <label for="validationCustom05"><strong>Tags *</strong></label>
         <input type="text" class="form-control" placeholder="Tags" name="tags" required>
 
       </div>
       <div class="col-md-12 mb-4">
-        <label for="validationCustom05">Recurring</label>
-        <input type="text" class="form-control" id="validationCustom05" name="recurring_data" placeholder="Is the data recurring?" required>
-        <div class="invalid-feedback">
-          Please type YES/NO for recurring data
-        </div>
+        <label for="validationCustom05"><strong>Recurrent *</strong></label>
+          <select id="inputState" class="form-control" name="recurring_data">
+
+            <option>Yes</option>
+              <option>No</option>
+              <option selected>Not Aware</option>
+
+          </select>
       </div>
 
       <div class="form-group">
@@ -206,18 +242,17 @@
       </div>
         </div>
         {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        {{message}}
-        </div>
-      {% endfor %}
-      {% endif %}
-    {% endwith %}
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          {{message}}
+          </div>
+        {% endfor %}
+        {% endif %}
+      {% endwith %}
 
-    {% block body %}{% endblock %}
-
+      {% block body %}{% endblock %}
       <button class="btn btn-primary" type="submit">Submit form</button>
 
     </form>
@@ -257,7 +292,6 @@
 
     </div>
   </section><!-- #intro -->
-
 
 
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
